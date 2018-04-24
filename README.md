@@ -12,20 +12,22 @@ python csv2vcf.py CSV_FILE_NAME [ -s | --single ] INPUT_FILE_FORMAT
 参数含义 :
 
 - `CSV_FILE_NAME` 你想转换的CSV文件
-- `INPUT_FILE_FORMAT` 一个JSON格式的描述字符串，告诉**csv2vcf**如何解析你的输入文件
+- `INPUT_FILE_FORMAT` 一个JSON格式的描述字符串，告诉 **csv2vcf** 如何解析你的输入文件
 - `-s` or `--single` : 默认情况下是输出单独的一个个vcf文件，如果设置了此参数会把所有转换结果整体输出到一个文件。
 
 
-###### JSON 格式 :
+#### JSON 格式 :
 
 JSON 对象可以有下面这些属性 :
 
-`name`, `nickname`, `org`, `tel`, `tel2`, `tel3`, `tel4`, `tel5`, `tel6`, `url`, `bday`, `role`, `note`, 和 `email`, 每个属性对应 [vCard 属性类型](https://en.wikipedia.org/wiki/VCard)
+`name`, `nickname`, `org`, `tel`, `tel2`, `tel3`, `tel4`, `tel5`, `tel6`, `url`, `bday`, `role`, `note`, 和 `email`, 属性可以参考 [vCard 属性类型](https://en.wikipedia.org/wiki/VCard)
+
+其中带`tel`的都是电话号码，换言之，每个联系人最多有7个号码（我想应该是够用了）。
 
 JSON字符串格式：`{KEY_1:KEY_1_列号, KEY_2:KEY_2_列号, ...}`
 
 
-###### 实例 :
+#### 实例 :
 
 假设你有一个CSV 叫`contacts.csv`，内容如下 :
 
@@ -42,17 +44,17 @@ JSON字符串格式：`{KEY_1:KEY_1_列号, KEY_2:KEY_2_列号, ...}`
 +-----------+-------------+
 ```
 
-要转换成 vCard, 你需要写 :
+- 要转换成 vCard, 并且把每个联系人转换到单独的一个vcf文件，你需要写 :
 
-`python csv2vcf.py contacts.csv '{"name":1, "tel":2}'`
+    ```python csv2vcf.py contacts.csv '{"name":1, "tel":2}'```
 
-上面是会把每个联系人转换到单独的一个vcf文件。
+- 如果你想把所有联系人生成到单独的一个vcf文件，你需要写：
 
-如果你要生成单独的一个vcf文件，你需要写：
-
-`python csv2vcf.py contacts.csv -s '{"name":1, "tel":2}'`
+    ```python csv2vcf.py contacts.csv -s '{"name":1, "tel":2}'```
 
 
 ## Copyright and license :
 
 The license is available within the repository in the [LICENSE](https://github.com/mridah/csv2vcf/blob/master/LICENSE.md) file.
+
+
