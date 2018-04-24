@@ -1,34 +1,33 @@
 # csv2vcf
-csv2vcf is a small command line tool to convert CSV files to VCard (.vcf) files.
+csv2vcf 是一个命令行工具（基于python）用于把 CSV 转换成 VCard (.vcf) 文件.
 
-## Usage :
+## 使用方法 :
 
-Go to terminal or command prompt and type :
+终端输入 :
 
 ```
 python csv2vcf.py CSV_FILE_NAME [ -s | --single ] INPUT_FILE_FORMAT
 ```
 
-Where :
+参数含义 :
 
-- `CSV_FILE_NAME` is the full name of the CSV file you want to convert
-- `INPUT_FILE_FORMAT` is a JSON formatted string which tells **csv2vcf** how to parse your input file
-- `-s` or `--single` : use this argument if you want your output in a single file. Optional parameter. By default, the program will create separate Vcard files for each entry
-
-
-
-###### JSON Format :
-
-The JSON string can have the following keys :
-
-`name`, `nickname`, `org`, `tel`, `url`, `bday`, `role`, and `email`, where each property is in accordance with [vCard property types](https://en.wikipedia.org/wiki/VCard)
-
-Format is `{KEY_1:KEY_1_COLUMN_NO, KEY_2:KEY_2_COLUMN_NO, ...}`
+- `CSV_FILE_NAME` 你想转换的CSV文件
+- `INPUT_FILE_FORMAT` 一个JSON格式的描述字符串，告诉**csv2vcf**如何解析你的输入文件
+- `-s` or `--single` : 默认情况下是输出单独的一个个vcf文件，如果设置了此参数会把所有转换结果整体输出到一个文件。
 
 
-###### Example :
+###### JSON 格式 :
 
-Suppose you have a CSV file `contacts.csv` with the following content :
+JSON 对象可以有下面这些属性 :
+
+`name`, `nickname`, `org`, `tel`, `tel2`, `tel3`, `tel4`, `tel5`, `tel6`, `url`, `bday`, `role`, `note`, 和 `email`, 每个属性对应 [vCard 属性类型](https://en.wikipedia.org/wiki/VCard)
+
+JSON字符串格式：`{KEY_1:KEY_1_列号, KEY_2:KEY_2_列号, ...}`
+
+
+###### 实例 :
+
+假设你有一个CSV 叫`contacts.csv`，内容如下 :
 
 ```
 +-----------+-------------+
@@ -43,19 +42,15 @@ Suppose you have a CSV file `contacts.csv` with the following content :
 +-----------+-------------+
 ```
 
-To convert this file to vCard, you will have to write :
+要转换成 vCard, 你需要写 :
 
 `python csv2vcf.py contacts.csv '{"name":1, "tel":2}'`
 
-if you want separate vCards for each person, or
+上面是会把每个联系人转换到单独的一个vcf文件。
 
-`python csv2vcf.py -s contacts.csv '{"name":1, "tel":2}'`
+如果你要生成单独的一个vcf文件，你需要写：
 
-if you want to generate a single vCard file
-
-
-## Report bugs and suggestions :
-If you want to report a bug or want to add a sugestion, just add it in the issues. Or you can mail me at [this](mailto:mridul.ahuja@gmail.com).
+`python csv2vcf.py contacts.csv -s '{"name":1, "tel":2}'`
 
 
 ## Copyright and license :
