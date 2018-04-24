@@ -171,7 +171,7 @@ def convert_to_vcard(input_file, single_output, input_file_format):
 
 def main(args):
     args_len = len(args)
-    print(args)
+
     if args_len < 3 or args_len > 4 :
         print ( "Usage:")
         print ( args[0] + " filename")
